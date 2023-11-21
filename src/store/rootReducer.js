@@ -1,8 +1,8 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import commonReducer from "./reducers/common";
-import authReducer from "./reducers/auth";
+import { combineReducers } from '@reduxjs/toolkit';
+import commonReducer from './reducers/common';
+import authReducer from './reducers/auth';
 import userReducer from './reducers/user';
-import reducerTypes from "./reducerTypes";
+import reducerTypes from './reducerTypes';
 
 const rootReducer = {};
 rootReducer[reducerTypes.common] = commonReducer;

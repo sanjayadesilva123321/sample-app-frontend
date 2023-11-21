@@ -1,25 +1,22 @@
-import React, { Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import ToastAlerts from "./components/commmon/toastAlerts/ToastAlerts";
-import { AuthProvider } from "./containers/auth/AuthProvider";
-import Layout from "./components/commmon/layout/Layout";
-import Loading from "./components/commmon/loading/Loading";
-import AuthenticatedWrapper from "./containers/auth/authenticationWrappers/Authenticated";
-import UnAuthenticatedWrapper from "./containers/auth/authenticationWrappers/UnAuthenticated";
+import { routes } from './helpers/routes';
 
-const Register = React.lazy(() =>
-  import("./containers/auth/register/Register")
-);
-const Login = React.lazy(() => import("./containers/auth/login/Login"));
-const Home = React.lazy(() => import("./containers/home/Home"));
-const Editor = React.lazy(() => import("./containers/editor/Editor"));
-const Unauthorized = React.lazy(() =>
-  import("./components/auth/unauthroized/Unauthorized")
-);
-const NotFoundPage = React.lazy(() =>
-    import("./components/auth/notFoundPage/NotFoundPage")
-);
+import { AuthProvider } from './containers/auth/AuthProvider';
+import AuthenticatedWrapper from './containers/auth/authenticationWrappers/Authenticated';
+import UnAuthenticatedWrapper from './containers/auth/authenticationWrappers/UnAuthenticated';
+
+import ToastAlerts from './components/commmon/toastAlerts/ToastAlerts';
+import Loading from './components/commmon/loading/Loading';
+import Layout from './components/commmon/layout/Layout';
+
+const Register = React.lazy(() => import('./containers/auth/register/Register'));
+const Login = React.lazy(() => import('./containers/auth/login/Login'));
+const Home = React.lazy(() => import('./containers/home/Home'));
+const Editor = React.lazy(() => import('./containers/editor/Editor'));
+const Unauthorized = React.lazy(() => import('./components/auth/unauthorized/Unauthorized'));
+const NotFoundPage = React.lazy(() => import('./components/auth/notFoundPage/NotFoundPage'));
 
 function App() {
   return (
@@ -29,10 +26,10 @@ function App() {
         <UnAuthenticatedWrapper>
           <Suspense fallback={<Loading />}>
             <Routes>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="/" element={<Login />} />
-              <Route path="*" element={<NotFoundPage />} />
+              <Route path={routes.UN_AUTHENTICATED.LOGIN.PATH} element={<Login />} />
+              <Route path={routes.UN_AUTHENTICATED.REGISTER.PATH} element={<Register />} />
+              <Route path={routes.ROOT.PATH} element={<Login />} />
+              <Route path={routes.ALL.PATH} element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </UnAuthenticatedWrapper>
@@ -41,12 +38,12 @@ function App() {
         <AuthenticatedWrapper>
           <Suspense fallback={<Loading />}>
             <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="editor" element={<Editor />} />
-                <Route path="unauthorized" element={<Unauthorized />} />
+              <Route path={routes.ROOT.PATH} element={<Layout />}>
+                <Route path={routes.ROOT.PATH} element={<Home />} />
+                <Route path={routes.AUTHENTICATED.EDITOR.PATH} element={<Editor />} />
+                <Route path={routes.AUTHENTICATED.UNAUTHORIZED.PATH} element={<Unauthorized />} />
               </Route>
-              <Route path="*" element={<NotFoundPage />} />
+              <Route path={routes.ALL.PATH} element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </AuthenticatedWrapper>

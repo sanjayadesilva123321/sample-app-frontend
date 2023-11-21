@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
-const Unauthorized = () => {
+function Unauthorized() {
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
@@ -17,6 +17,6 @@ const Unauthorized = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Unauthorized;

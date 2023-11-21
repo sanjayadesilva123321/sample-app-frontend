@@ -1,23 +1,19 @@
-/* eslint-disable testing-library/no-node-access */
-/* eslint-disable testing-library/prefer-screen-queries */
-/* eslint-disable testing-library/no-render-in-setup */
-/* eslint-disable react/jsx-no-constructed-context-values */
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
 
-import AuthorizedWithMessage from "./AuthorizedWithMessage";
+import AuthorizedWithMessage from './AuthorizedWithMessage';
 
-import { AuthContext } from "../AuthProvider";
+import { AuthContext } from '../AuthProvider';
 
-import { checkProps } from "../../../utils/TestUtils";
+import { checkProps } from '../../../utils/TestUtils';
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
   useNavigate: jest.fn(),
 }));
 
 const defaultProps = {
   requiredPermissions: [],
-  children: "Children Text",
+  children: 'Children Text',
 };
 
 const defaultContextValues = {
@@ -31,27 +27,27 @@ const setup = (props = {}, contextValues = {}) => {
   return render(
     <AuthContext.Provider value={setupContextValues}>
       <AuthorizedWithMessage {...setupProps} />
-    </AuthContext.Provider>
+    </AuthContext.Provider>,
   );
 };
 
-test("validate props types", () => {
+test('validate props types', () => {
   checkProps(AuthorizedWithMessage, defaultProps);
 });
 
-describe("while loading", () => {
+describe('while loading', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = setup();
   });
   test('"loading" component should be available', () => {
-    expect(wrapper.getByTestId("component-loading")).toBeVisible();
+    expect(wrapper.getByTestId('component-loading')).toBeVisible();
   });
   test('"children" should not be available', () => {
     expect(wrapper.queryByText(defaultProps.children)).not.toBeInTheDocument();
   });
 });
-describe("has permissions", () => {
+describe('has permissions', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = setup(
@@ -59,28 +55,28 @@ describe("has permissions", () => {
       {
         isProcessing: false,
         hasPermission: jest.fn().mockReturnValue(true),
-      }
+      },
     );
   });
   test('"loading" component should not be available', () => {
-    expect(wrapper.queryByTestId("component-loading")).not.toBeInTheDocument();
+    expect(wrapper.queryByTestId('component-loading')).not.toBeInTheDocument();
   });
   test('"children" should be available', () => {
     expect(wrapper.getByText(defaultProps.children)).toBeVisible();
   });
 });
-describe("no permissions", () => {
+describe('no permissions', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = setup(
       {},
       {
         isProcessing: false,
-      }
+      },
     );
   });
   test('"loading" component should not be available', () => {
-    expect(wrapper.queryByTestId("component-loading")).not.toBeInTheDocument();
+    expect(wrapper.queryByTestId('component-loading')).not.toBeInTheDocument();
   });
   test('"children" should not be available', () => {
     expect(wrapper.queryByText(defaultProps.children)).not.toBeInTheDocument();

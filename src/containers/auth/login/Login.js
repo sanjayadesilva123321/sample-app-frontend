@@ -1,16 +1,18 @@
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
-import { useAuth } from "../AuthProvider";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-import { USER } from "../../../helpers/auth";
+import { useAuth } from '../AuthProvider';
 
-const Login = () => {
+import { USER } from '../../../helpers/auth';
+import { LOGIN } from '../../../helpers/login/login';
+
+function Login() {
   const initialValues = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   };
   const { loginUserFlow } = useAuth();
 
@@ -22,14 +24,14 @@ const Login = () => {
   const onSubmit = async (values, { resetForm }) => {
     const user = values.username;
     const pwd = values.password;
-    loginUserFlow(user,pwd);
+    loginUserFlow(user, pwd);
     resetForm();
   };
 
   return (
-    <main className="App">
+    <div className="App" data-testid="login">
       <section>
-        <h2>Sign In</h2>
+        <h2>{LOGIN.SIGNIN}</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -37,41 +39,31 @@ const Login = () => {
         >
           <Form>
             <div>
-              <label htmlFor="username">Username</label>
-              <Field
-                type="text"
-                id="username"
-                name="username"
-                className="fieldWrapper"
-              />
+              <label htmlFor="username">{LOGIN.USERNAME}</label>
+              <Field type="text" id="username" name="username" className="fieldWrapper" />
               <ErrorMessage name="username" component="div" className="error" />
             </div>
 
             <div>
-              <label htmlFor="password">Password</label>
-              <Field
-                type="password"
-                id="password"
-                name="password"
-                className="fieldWrapper"
-              />
+              <label htmlFor="password">{LOGIN.PASSWORD}</label>
+              <Field type="password" id="password" name="password" className="fieldWrapper" />
               <ErrorMessage name="password" component="div" className="error" />
             </div>
-            <Button type="submit" variant="light" data-testid="signin-button">
-              Sign In
+            <Button type="submit" variant="light" data-testid="login-signin-button">
+              {LOGIN.SIGNIN}
             </Button>
           </Form>
         </Formik>
         <p>
-          Need an Account?
+          {LOGIN.NEED_AN_ACCOUNT}
           <br />
           <span className="line" data-testid="signup-span">
-            <Link to="/register">Sign Up</Link>
+            <Link to="/register">{LOGIN.SIGNUP}</Link>
           </span>
         </p>
       </section>
-    </main>
+    </div>
   );
-};
+}
 
 export default Login;

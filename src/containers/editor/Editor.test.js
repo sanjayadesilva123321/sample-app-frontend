@@ -1,15 +1,11 @@
-/* eslint-disable testing-library/prefer-screen-queries */
-/* eslint-disable testing-library/render-result-naming-convention */
+import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
-import { render } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import Editor from './Editor';
 
-import Editor from "./Editor";
+import { AuthContext } from '../auth/AuthProvider';
 
-import { AuthContext } from "../auth/AuthProvider";
-import { checkProps, getByTestId } from "../../utils/TestUtils";
-
-const defaultProps = {};
+import { checkProps, getByTestId } from '../../utils/TestUtils';
 
 const defaultContextValues = {
   isProcessing: false,
@@ -19,28 +15,25 @@ const defaultContextValues = {
 };
 
 const setup = (props = {}, contextValues = {}) => {
-  const setupProps = { ...defaultProps, ...props };
+  const setupProps = { ...props };
   const setupContextValues = { ...defaultContextValues, ...contextValues };
   return render(
     <BrowserRouter>
       <AuthContext.Provider value={setupContextValues}>
         <Editor {...setupProps} />
       </AuthContext.Provider>
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 };
 
-test("validate props types", () => {
-  checkProps(Editor, defaultProps);
+test('validate props types', () => {
+  checkProps(Editor);
 });
 
-describe("default component rendering tests", () => {
-  test("Editor component should be available", () => {
+describe('default component rendering tests', () => {
+  test('Editor component should be available', () => {
     const componentWrapper = setup();
-    const component = getByTestId(
-      componentWrapper.container,
-      "component-editor"
-    );
+    const component = getByTestId(componentWrapper.container, 'component-editor');
     expect(component).toBeInTheDocument();
   });
 });

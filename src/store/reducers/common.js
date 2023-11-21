@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import reducerTypes from "../reducerTypes";
+import reducerTypes from '../reducerTypes';
 
 // Redux Toolkit allows us to write "mutating" logic in reducers. It
 // doesn't actually mutate the state because it uses the Immer library,
@@ -22,9 +22,7 @@ export const commonSlice = createSlice({
       state.toastAlerts = [...state.toastAlerts, data.payload];
     },
     HIDE_TOAST_ALERT: (state, data) => {
-      state.toastAlerts = state.toastAlerts.filter(
-        (alert) => alert.id !== data.payload
-      );
+      state.toastAlerts = state.toastAlerts.filter(alert => alert.id !== data.payload);
     },
   },
 });

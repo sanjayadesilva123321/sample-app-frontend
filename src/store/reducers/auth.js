@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import reducerTypes from "../reducerTypes";
+import { createSlice } from '@reduxjs/toolkit';
+import reducerTypes from '../reducerTypes';
 
 const initialState = {
   isTokenExpired: false,

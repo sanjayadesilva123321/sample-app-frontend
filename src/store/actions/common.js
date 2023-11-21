@@ -1,7 +1,7 @@
-import { v1 as uuidv1 } from "uuid";
+import { v1 as uuidv1 } from 'uuid';
 
-import * as commonReducer from "../reducers/common";
-import { TOAST_ALERT_TYPES } from "../../helpers/common";
+import * as commonReducer from '../reducers/common';
+import { TOAST_ALERT_TYPES } from '../../helpers/common';
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -11,22 +11,22 @@ import { TOAST_ALERT_TYPES } from "../../helpers/common";
 /* -------------------------------------------------------------------------- */
 /*                                 Toast alert                                */
 /* -------------------------------------------------------------------------- */
-export const showToastAlert = (data) => (dispatch) => {
+export const showToastAlert = data => dispatch => {
   data.id = uuidv1();
   data.show = true;
   dispatch(commonReducer.SHOW_TOAST_ALERT(data));
 };
 
-export const hideToastAlert = (id) => (dispatch) => {
+export const hideToastAlert = id => dispatch => {
   dispatch(commonReducer.HIDE_TOAST_ALERT(id));
 };
 
-export const showErrorAlert = (data) => (dispatch) => {
+export const showErrorAlert = data => dispatch => {
   data.type = TOAST_ALERT_TYPES.ERROR.type;
   dispatch(showToastAlert(data));
 };
 
-export const showSuccessAlert = (data) => (dispatch) => {
+export const showSuccessAlert = data => dispatch => {
   data.type = TOAST_ALERT_TYPES.SUCCESS.type;
   dispatch(showToastAlert(data));
 };

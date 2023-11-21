@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import { useAuth } from "../AuthProvider";
-import Loading from "../../../components/commmon/loading/Loading";
-import Unauthorized from "../../../components/auth/unauthroized/Unauthorized";
+import { useAuth } from '../AuthProvider';
+import Loading from '../../../components/commmon/loading/Loading';
+import Unauthorized from '../../../components/auth/unauthorized/Unauthorized';
 
 function AuthorizedWithMessage(props) {
   /**
@@ -40,7 +40,7 @@ AuthorizedWithMessage.propTypes = {
 };
 
 AuthorizedWithMessage.defaultProps = {
-  message: "",
+  message: '',
 };
 
 export default AuthorizedWithMessage;

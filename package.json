@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
     "check-prop-types": "^1.1.2",
+    "lodash": "^4.17.21",
     "formik": "^2.2.9",
     "jwt-decode": "^4.0.0",
     "prop-types": "^15.8.1",
@@ -32,7 +33,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format-check": "prettier --check",
+    "format": "prettier --write"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +53,24 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "npm run format",
+      "npm run lint-fix"
+    ],
+    "*.{html,css,less,ejs,scss}": [
+      "npm run format"
     ]
   }
 }

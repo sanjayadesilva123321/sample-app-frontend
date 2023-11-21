@@ -1,25 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import Posts from "../../components/posts/Posts";
-import { ROLES } from "../../helpers/auth";
-import AuthorizedWithMessage from "../auth/authorizationWrappers/AuthorizedWithMessage";
-import { PostProvider } from "../post/PostProvider";
+import { PostProvider } from '../post/PostProvider';
 
-const Editor = () => {
+import Posts from '../../components/posts/Posts';
+import AuthorizedWithMessage from '../auth/authorizationWrappers/AuthorizedWithMessage';
+
+import { ROLES } from '../../helpers/auth';
+import { EDITOR } from '../../helpers/editor/editor';
+
+function Editor() {
   return (
     <div data-testid="component-editor" className="wrapper">
       <AuthorizedWithMessage requiredPermissions={[ROLES.Manager, ROLES.Admin]}>
-        <h2>Editors Page</h2>
+        <h2>{EDITOR.EDITORS_PAGE}</h2>
         <PostProvider>
           <Posts />
         </PostProvider>
         <br />
         <div className="flexGrow">
-          <Link to="/">Home</Link>
+          <Link to="/">{EDITOR.Home}</Link>
         </div>
       </AuthorizedWithMessage>
     </div>
   );
-};
+}
 
 export default Editor;

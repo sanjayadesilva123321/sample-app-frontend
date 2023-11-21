@@ -1,19 +1,17 @@
-import reducer, { SHOW_TOAST_ALERT, HIDE_TOAST_ALERT } from "./common";
+import reducer, { SHOW_TOAST_ALERT, HIDE_TOAST_ALERT } from './common';
 
 const defaultPreviousState = {
   toastAlerts: [],
 };
 
-test("should return the initial state", () => {
+test('should return the initial state', () => {
   expect(reducer(undefined, { type: undefined })).toEqual({
     toastAlerts: [],
   });
 });
 
 test('should handle "SHOW_TOAST_ALERT"', () => {
-  expect(
-    reducer(defaultPreviousState, SHOW_TOAST_ALERT({ id: 1, show: true }))
-  ).toEqual({
+  expect(reducer(defaultPreviousState, SHOW_TOAST_ALERT({ id: 1, show: true }))).toEqual({
     toastAlerts: [{ id: 1, show: true }],
   });
 });

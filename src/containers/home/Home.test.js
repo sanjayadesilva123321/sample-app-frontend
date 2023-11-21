@@ -1,18 +1,15 @@
-/* eslint-disable testing-library/prefer-screen-queries */
-/* eslint-disable testing-library/render-result-naming-convention */
+/* eslint-disable no-import-assign */
+import { render, fireEvent, screen, waitFor, act } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import { render, fireEvent, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import Home from './Home';
 
-import Home from "./Home";
-import store from "../../store/store";
+import { AuthContext } from '../auth/AuthProvider';
 
-import { AuthContext } from "../auth/AuthProvider";
-import { checkProps, getByTestId } from "../../utils/TestUtils";
-import * as userSelector from "../../store/selectores/user";
+import { checkProps, getByTestId, storeFactory } from '../../utils/TestUtils';
 
-const defaultProps = {};
+import reducerTypes from '../../store/reducerTypes';
 
 const defaultContextValues = {
   isProcessing: false,
@@ -22,12 +19,17 @@ const defaultContextValues = {
   signOut: jest.fn(),
 };
 
-const setup = (props = {}, contextValues = {}) => {
-  const setupProps = { ...defaultProps, ...props };
-  const setupContextValues = { ...defaultContextValues, ...contextValues };
+const initialState = {
+  [reducerTypes.user]: {
+    name: 'TestUserName',
+  },
+};
 
-  // Mock the userName selector here
-  userSelector.userName = jest.fn(() => "TestUserName");
+const store = storeFactory(initialState);
+
+const setup = (props = {}, contextValues = {}) => {
+  const setupProps = { ...props };
+  const setupContextValues = { ...defaultContextValues, ...contextValues };
 
   return render(
     <Provider store={store}>
@@ -36,35 +38,38 @@ const setup = (props = {}, contextValues = {}) => {
           <Home {...setupProps} />
         </AuthContext.Provider>
       </BrowserRouter>
-      ,
-    </Provider>
+    </Provider>,
   );
 };
 
-test("validate props types", () => {
-  checkProps(Home, defaultProps);
+test('validate props types', () => {
+  checkProps(Home);
 });
 
-describe("default component rendering tests", () => {
-  test("Home component should be available", () => {
+describe('default component rendering tests', () => {
+  test('Home component should be available', () => {
     const componentWrapper = setup();
-    const component = getByTestId(componentWrapper.container, "component-home");
+    const component = getByTestId(componentWrapper.container, 'home');
     expect(component).toBeInTheDocument();
   });
 
-  test("Check if the user name is displayed", () => {
+  test('Check if the user name is displayed', async () => {
     const setIsBackendAuthorized = jest.fn();
-    userSelector.userName = jest.fn(() => "TestUserName");
-    setup(
-      {},
-      {
-        hasPermission: jest.fn(() => true), // Provide the necessary permissions
-        setIsBackendAuthorized,
-      }
-    );
-    expect(
-      screen.getByText("You are logged in! - TestUserName")
-    ).toBeInTheDocument();
+
+    act(() => {
+      setup(
+        {},
+        {
+          hasPermission: jest.fn(() => true), // Provide the necessary permissions
+          setIsBackendAuthorized,
+        },
+      );
+    });
+
+    // Wait for the element to appear
+    await waitFor(() => {
+      expect(screen.getByText('You are logged in! - TestUserName')).toBeInTheDocument();
+    });
   });
 
   test('Clicking "Sign Out" button should trigger sign out', () => {
@@ -76,13 +81,13 @@ describe("default component rendering tests", () => {
         hasPermission: jest.fn(() => true), // Provide the necessary permissions
         signOut,
         setIsBackendAuthorized,
-      }
+      },
     );
     // Find the "Sign Out" button by its text content and click it
-    const signOutButton = screen.getByTestId("sign-out-button");
+    const signOutButton = screen.getByTestId('home-sign-out');
     fireEvent.click(signOutButton);
 
     // Assertions for sign out
-    expect(signOut).toHaveBeenCalledWith();
+    expect(signOut).toHaveBeenCalled();
   });
 });

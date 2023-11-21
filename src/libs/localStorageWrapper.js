@@ -1,9 +1,9 @@
-import store from "store2";
-import isNil from "lodash/isNil";
-import isEmpty from "lodash/isEmpty";
+import store from 'store2';
+import isNil from 'lodash/isNil';
+import isEmpty from 'lodash/isEmpty';
 
 // store({key: data, key2: data})
-const setAllData = (storeObject) => {
+const setAllData = storeObject => {
   store.setAll(storeObject);
 };
 
@@ -16,7 +16,7 @@ const setSingleData = (key, value) => {
 const getAllData = () => store.getAll();
 
 // store(key)
-const getSingleData = (key) => store.get(key);
+const getSingleData = key => store.get(key);
 
 // store(false)
 const clearData = () => {
@@ -24,14 +24,13 @@ const clearData = () => {
 };
 
 // returns true or false
-const hasKey = (key) => store.has(key);
+const hasKey = key => store.has(key);
 
 // returns true or false
-const hasData = (key) =>
-  store.has(key) && !isNil(store.get(key)) && !isEmpty(store.get(key));
+const hasData = key => store.has(key) && !isNil(store.get(key)) && !isEmpty(store.get(key));
 
 // removes key and its data, then returns the data or alt, if none
-const removeSingleData = (key) => {
+const removeSingleData = key => {
   store.remove(key);
 };
 

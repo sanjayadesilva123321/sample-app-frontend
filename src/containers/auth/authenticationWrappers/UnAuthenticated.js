@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import { useAuth } from "../AuthProvider";
-import Loading from "../../../components/commmon/loading/Loading";
+import { useAuth } from '../AuthProvider';
+import Loading from '../../../components/commmon/loading/Loading';
 
 function UnAuthenticated(props) {
   /**

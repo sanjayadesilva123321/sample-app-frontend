@@ -1,4 +1,4 @@
-import { BACKEND_API_BASE_URL } from "../config/config";
+import { BACKEND_API_BASE_URL } from '../config/config';
 
 export default Object.freeze({
   POSTS: {

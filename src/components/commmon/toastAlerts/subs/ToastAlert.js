@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import Toast from "react-bootstrap/Toast";
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Toast from 'react-bootstrap/Toast';
 
-import { TOAST_ALERT_TYPES } from "../../../../helpers/common";
+import { TOAST_ALERT_TYPES } from '../../../../helpers/common';
 
 function ToastAlert(props) {
   const { type, delay, alert, hideAlert, dataTestId } = props;
@@ -38,15 +38,9 @@ function ToastAlert(props) {
       key={alert.id}
       data-testid={dataTestId}
     >
-      <Toast.Header
-        closeVariant="white"
-        data-testid="component-toast-alert__header"
-      >
+      <Toast.Header closeVariant="white" data-testid="component-toast-alert__header">
         <div className="icon">
-          <i
-            className={metaData.icon}
-            data-testid="component-toast-alert__icon"
-          />
+          <i className={metaData.icon} data-testid="component-toast-alert__icon" />
         </div>
         <p className="mb-0" data-testid="component-toast-alert__message">
           {alert.message}
@@ -79,7 +73,7 @@ ToastAlert.propTypes = {
 ToastAlert.defaultProps = {
   type: TOAST_ALERT_TYPES.SUCCESS.type,
   delay: 3000,
-  dataTestId: "component-toast-alert",
+  dataTestId: 'component-toast-alert',
 };
 
 export default ToastAlert;

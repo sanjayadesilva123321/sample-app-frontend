@@ -1,39 +1,30 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Modal, Button } from "react-bootstrap";
-import { Formik, Form, Field } from "formik";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const UpdatePostModal = ({ show, onHide, onSubmit, postToEdit }) => {
+import { Modal, Button } from 'react-bootstrap';
+import { Formik, Form, Field } from 'formik';
+
+import { MODAL } from '../../../helpers/posts/posts';
+
+function UpdatePostModal({ show, onHide, onSubmit, postToEdit }) {
   return (
     <Modal show={show} onHide={onHide} data-testid="update-post-modal">
       <Modal.Header>
-        <Modal.Title>Update Post</Modal.Title>
+        <Modal.Title>{MODAL.UPDATE_POST}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="post__wrapper">
           <div className="container">
-            <Formik
-              initialValues={postToEdit}
-              onSubmit={onSubmit}
-              enableReinitialize
-            >
+            <Formik initialValues={postToEdit} onSubmit={onSubmit} enableReinitialize>
               <Form className="post">
                 <Field type="text" name="title" placeholder="Title..." />
                 <Field type="text" name="content" placeholder="Content..." />
                 <div className="action-button-wrapper">
-                  <Button
-                    type="submit"
-                    data-testid="modal-update-button"
-                    variant="primary"
-                  >
-                    Update
+                  <Button type="submit" data-testid="modal-update-button" variant="primary">
+                    {MODAL.UPDATE}
                   </Button>
-                  <Button
-                    onClick={onHide}
-                    variant="danger"
-                    data-testid="modal-update-close"
-                  >
-                    Close
+                  <Button onClick={onHide} variant="danger" data-testid="modal-update-close">
+                    {MODAL.CLOSE}
                   </Button>
                 </div>
               </Form>
@@ -43,7 +34,7 @@ const UpdatePostModal = ({ show, onHide, onSubmit, postToEdit }) => {
       </Modal.Body>
     </Modal>
   );
-};
+}
 
 UpdatePostModal.propTypes = {
   show: PropTypes.bool.isRequired,
@@ -54,6 +45,10 @@ UpdatePostModal.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
   }),
+};
+
+UpdatePostModal.defaultProps = {
+  postToEdit: null,
 };
 
 export default UpdatePostModal;

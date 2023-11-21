@@ -1,13 +1,17 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
-import * as userSelector from "../../store/selectores/user";
-import { useAuth } from "../auth/AuthProvider";
-import { ROLES } from "../../helpers/auth";
-import AuthorizedWithMessage from "../auth/authorizationWrappers/AuthorizedWithMessage";
+import { useAuth } from '../auth/AuthProvider';
 
-const Home = () => {
+import AuthorizedWithMessage from '../auth/authorizationWrappers/AuthorizedWithMessage';
+
+import { ROLES } from '../../helpers/auth';
+import { HOME } from '../../helpers/home/home';
+
+import * as userSelector from '../../store/selectores/user';
+
+function Home() {
   const { signOut } = useAuth();
   const userName = useSelector(userSelector.userName);
 
@@ -16,29 +20,23 @@ const Home = () => {
   };
 
   return (
-    <div data-testid="component-home" className="home-wrapper">
-      <AuthorizedWithMessage
-        requiredPermissions={[ROLES.User, ROLES.Manager, ROLES.Admin]}
-      >
+    <div data-testid="home" className="home-wrapper">
+      <AuthorizedWithMessage requiredPermissions={[ROLES.User, ROLES.Manager, ROLES.Admin]}>
         <section>
-          <h2>Home</h2>
-          <p>{`You are logged in! - ${userName}`}</p>
+          <h2>{HOME.HOME}</h2>
+          <p>{`${HOME.YOU_ARE_LOGGED_IN} ${userName}`}</p>
           <br />
-          <Link to="/editor">Go to the Editors page</Link>
+          <Link to="/editor">{HOME.EDITORS_PAGE}</Link>
           <br />
           <div className="flexGrow">
-            <Button
-              onClick={signOutUser}
-              variant="light"
-              data-testid="sign-out-button"
-            >
-              Sign Out
+            <Button onClick={signOutUser} variant="light" data-testid="home-sign-out">
+              {HOME.SIGNOUT}
             </Button>
           </div>
         </section>
       </AuthorizedWithMessage>
     </div>
   );
-};
+}
 
 export default Home;

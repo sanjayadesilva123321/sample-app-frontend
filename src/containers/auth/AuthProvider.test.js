@@ -1,4 +1,5 @@
 import { AuthProvider } from './AuthProvider';
+
 import { checkProps } from '../../utils/TestUtils';
 
 const defaultProps = {

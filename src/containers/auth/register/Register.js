@@ -1,31 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
-import { useAuth } from "../AuthProvider";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-import { USER } from "../../../helpers/auth";
+import { useAuth } from '../AuthProvider';
 
-const Register = () => {
+import { USER } from '../../../helpers/auth';
+import { routes } from '../../../helpers/routes';
+import { REGISTER } from '../../../helpers/register/register';
+
+function Register() {
   const initialValues = {
-    username: "",
-    password: "",
-    confirmPassword: "",
+    username: '',
+    password: '',
+    confirmPassword: '',
   };
 
   const { registerUserFlow } = useAuth();
 
   const validationSchema = Yup.object({
-    username: Yup.string()
-      .required(USER.USER_NAME_REQUIRED)
-      .min(3, USER.USER_NAME_VALIDATION),
-    password: Yup.string()
-      .required(USER.PASSWORD_REQUIRED)
-      .min(6, USER.PASSWORD_VALIDATIOM),
-    confirmPassword: Yup.string() // Validate password confirmation
-      .oneOf([Yup.ref(USER.PASSWORD), null], USER.PASSWORD_MATCH),
+    username: Yup.string().required(USER.USER_NAME_REQUIRED).min(3, USER.USER_NAME_VALIDATION),
+    password: Yup.string().required(USER.PASSWORD_REQUIRED).min(6, USER.PASSWORD_VALIDATIOM),
+    confirmPassword: Yup.string().oneOf([Yup.ref(USER.PASSWORD), null], USER.PASSWORD_MATCH),
   });
 
   const onSubmit = async (values, { resetForm }) => {
@@ -36,9 +34,9 @@ const Register = () => {
   };
 
   return (
-    <main className="App">
+    <div className="App" data-testid="register">
       <section>
-        <h2>Register</h2>
+        <h2>{REGISTER.REGISTER}</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -46,55 +44,41 @@ const Register = () => {
         >
           <Form>
             <div>
-              <label htmlFor="username">Username</label>
-              <Field
-                type="text"
-                id="username"
-                name="username"
-                className="fieldWrapper"
-              />
+              <label htmlFor="username">{REGISTER.USERNAME}</label>
+              <Field type="text" id="username" name="username" className="fieldWrapper" />
               <ErrorMessage name="username" component="div" className="error" />
             </div>
 
             <div>
-              <label htmlFor="password">Password</label>
-              <Field
-                type="password"
-                id="password"
-                name="password"
-                className="fieldWrapper"
-              />
+              <label htmlFor="password">{REGISTER.PASSWORD}</label>
+              <Field type="password" id="password" name="password" className="fieldWrapper" />
               <ErrorMessage name="password" component="div" className="error" />
             </div>
             <div>
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label htmlFor="confirmPassword">{REGISTER.CONFIRM_PASSWORD}</label>
               <Field
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
                 className="fieldWrapper"
               />
-              <ErrorMessage
-                name="confirmPassword"
-                component="div"
-                className="error"
-              />
+              <ErrorMessage name="confirmPassword" component="div" className="error" />
             </div>
-            <Button type="submit" variant="light" data-testid="signup-button">
-              Signup
+            <Button type="submit" variant="light" data-testid="register-signup-button">
+              {REGISTER.SIGNUP}
             </Button>
           </Form>
         </Formik>
         <p>
-          Already registered?
+          {REGISTER.ALREADY_REGISTERED}
           <br />
           <span className="line" data-testid="signin-span">
-            <Link to="/">Sign In</Link>
+            <Link to={routes.ROOT.PATH}>{REGISTER.SIGNIN}</Link>
           </span>
         </p>
       </section>
-    </main>
+    </div>
   );
-};
+}
 
 export default Register;

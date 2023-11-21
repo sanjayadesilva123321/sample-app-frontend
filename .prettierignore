@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+
+node_modules
+public
+
+# build pipeline files
+azure-pipelines.yml

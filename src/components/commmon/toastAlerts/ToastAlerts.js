@@ -1,9 +1,9 @@
-import { useSelector, useDispatch } from "react-redux";
-import ToastContainer from "react-bootstrap/ToastContainer";
+import { useSelector, useDispatch } from 'react-redux';
+import ToastContainer from 'react-bootstrap/ToastContainer';
 
-import ToastAlert from "./subs/ToastAlert";
-import * as commonActions from "../../../store/actions/common";
-import * as commonSelector from "../../../store/selectores/common";
+import ToastAlert from './subs/ToastAlert';
+import * as commonActions from '../../../store/actions/common';
+import * as commonSelector from '../../../store/selectores/common';
 
 function ToastAlerts() {
   /**
@@ -26,11 +26,11 @@ function ToastAlerts() {
   const toastAlerts = useSelector(commonSelector.toastAlerts);
 
   const dispatch = useDispatch();
-  const hideAlert = (id) => dispatch(commonActions.hideToastAlert(id));
+  const hideAlert = id => dispatch(commonActions.hideToastAlert(id));
 
   return (
     <ToastContainer position="bottom-end" data-testid="component-toast-alerts">
-      {toastAlerts?.map((alert) => (
+      {toastAlerts?.map(alert => (
         <ToastAlert
           type={alert.type}
           delay={alert.delay}

@@ -1,82 +1,87 @@
-import React, {useEffect, useState} from "react";
-import {Button, Table} from "react-bootstrap";
+import React, { useEffect, useState } from 'react';
+import { Button, Table } from 'react-bootstrap';
 
-import {usePost} from "../../containers/post/PostProvider";
-import {useAuth} from "../../containers/auth/AuthProvider";
-import UpdatePostModal from "./subs/UpdatePostModal";
+import UpdatePostModal from './subs/UpdatePostModal';
 
-import {ROLES} from "../../helpers/auth";
-import usePostActions from "./usePostActions";
+import { usePost } from '../../containers/post/PostProvider';
+import { useAuth } from '../../containers/auth/AuthProvider';
 
-const Posts = () => {
-    const {
-        getPostData,
-        postData,
-    } = usePost();
+// eslint-disable-next-line import/order
+import usePostActions from './usePostActions';
 
-    const auth = useAuth();
-    const {deleteHandler, updateHandler, onSubmitHandler, postToEdit} = usePostActions();
+import { ROLES } from '../../helpers/auth';
+import { TABLE } from '../../helpers/posts/posts';
 
-    const [showUpdatePostModal, setShowUpdatePostModal] = useState(false);
+function Posts() {
+  const { getPostData, postData } = usePost();
 
-    useEffect(() => {
-        getPostData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  const auth = useAuth();
+  const { deleteHandler, updateHandler, onSubmitHandler, postToEdit } = usePostActions();
 
-    return (
-        <div className="posts" data-testid="component-posts">
-            <div className="container">
-                <Table className="table">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Update</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {postData?.map((post) => (
-                        <tr key={post.id}>
-                            <td> {post.title} </td>
-                            <td> {post.content} </td>
-                            <td>
-                                <Button
-                                    onClick={() => {
-                                        setShowUpdatePostModal(true);
-                                        updateHandler(post);
-                                    }}
-                                    className="btn btn-primary"
-                                    data-testid="update-button"
-                                >
-                                    Update
-                                </Button>
-                            </td>
-                            <td>
-                                <Button
-                                    onClick={() => deleteHandler(post)}
-                                    className="btn btn-danger"
-                                    disabled={!auth.hasPermission([ROLES.Admin])}
-                                    data-testid="delete-button"
-                                >
-                                    Delete
-                                </Button>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </Table>
-            </div>
+  const [showUpdatePostModal, setShowUpdatePostModal] = useState(false);
 
-            <UpdatePostModal
-                show={showUpdatePostModal}
-                onHide={() => setShowUpdatePostModal(false)}
-                onSubmit={onSubmitHandler}
-                postToEdit={postToEdit}
-            />
-        </div>
-    );
-};
+  useEffect(() => {
+    getPostData();
+  }, []);
+
+  return (
+    <div className="posts" data-testid="component-posts">
+      <div className="container">
+        <Table className="table">
+          <thead>
+            <tr>
+              <th>{TABLE.TITLE}</th>
+              <th>{TABLE.DESCRIPTION}</th>
+              <th>{TABLE.UPDATE}</th>
+              <th>{TABLE.DELETE}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {postData?.map(post => (
+              <tr key={post.id}>
+                <td> {post.title} </td>
+                <td> {post.content} </td>
+                <td>
+                  <Button
+                    onClick={() => {
+                      setShowUpdatePostModal(true);
+                      updateHandler(post);
+                    }}
+                    className="btn btn-primary"
+                    data-testid="update-button"
+                  >
+                    {TABLE.UPDATE}
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    onClick={() => {
+                      deleteHandler(post);
+                    }}
+                    className="btn btn-danger"
+                    disabled={!auth.hasPermission([ROLES.Admin])}
+                    data-testid="delete-button"
+                  >
+                    {TABLE.DELETE}
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+
+      <UpdatePostModal
+        show={showUpdatePostModal}
+        onHide={() => {
+          setShowUpdatePostModal(false);
+          getPostData();
+        }}
+        onSubmit={onSubmitHandler}
+        postToEdit={postToEdit}
+      />
+    </div>
+  );
+}
 
 export default Posts;

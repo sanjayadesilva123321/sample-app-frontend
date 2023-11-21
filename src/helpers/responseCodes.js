@@ -13,7 +13,7 @@ export default Object.freeze({
     },
     UNAUTHORIZED: {
       CODE: 401,
-      MSG: "User is unauthorized",
+      MSG: 'User is unauthorized',
     },
     PERMISSION_ERROR: {
       CODE: 406,
@@ -30,7 +30,7 @@ export default Object.freeze({
 
     INTERNAL_SERVER_ERROR: {
       CODE: 500,
-      MSG: "Something went wrong",
+      MSG: 'Something went wrong',
     },
     BAD_GATEWAY: {
       CODE: 502,
@@ -43,7 +43,7 @@ export default Object.freeze({
     },
     LOGIN_ERROR: {
       CODE: 422,
-      MSG: "Invalid credentials"
+      MSG: 'Invalid credentials',
     },
     ALREADY_EXISTS: {
       ROLE_ALREADY_EXISTS: {
