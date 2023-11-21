@@ -25,7 +25,6 @@ function AuthProvider(props) {
   /* -------------------------------------------------------------------------- */
   const dispatch = useDispatch();
 
-  const [auth, setAuth] = useState({});
   const [userPermissions, setUserPermissions] = useState([]);
   const [isBackendAuthorized, setIsBackendAuthorized] = useState(hasAuthTokens());
   const [isProcessing, setIsProcessing] = useState(false);
@@ -36,7 +35,7 @@ function AuthProvider(props) {
   const loginUserFlow = useCallback(
     async (user, pwd) => {
       try {
-        const from = location.state?.from?.pathname || '/';
+        const from = location.state?.from?.pathname || `${routes.ROOT.PATH}`;
         setIsProcessing(true);
         const response = await authAPIs.loginUser({
           email: user,
@@ -48,7 +47,6 @@ function AuthProvider(props) {
         if (decoded !== undefined) {
           const roles = decoded?.roles || [];
           setUserPermissions(roles);
-          setAuth({ user, accessToken });
           setAccessToken(accessToken);
           setRoleToken(roleToken);
           dispatch(
@@ -79,8 +77,8 @@ function AuthProvider(props) {
       setIsProcessing(true);
       const response = await authAPIs.registerUser({ email: user, password: pwd });
       if (response?.data?.success) {
-        showSuccessAlert(response?.data?.message);
         navigate(routes.UN_AUTHENTICATED.LOGIN.FULL_PATH);
+        showSuccessAlert(response?.data?.message);
       }
       setIsProcessing(false);
     } catch (err) {
@@ -89,7 +87,6 @@ function AuthProvider(props) {
   }, []);
 
   const signOut = useCallback(() => {
-    setAuth({});
     setIsBackendAuthorized(false);
     deleteTokens();
     navigate(routes.UN_AUTHENTICATED.LOGIN.FULL_PATH);
@@ -132,8 +129,6 @@ function AuthProvider(props) {
   /* -------------------------------------------------------------------------- */
   const value = useMemo(
     () => ({
-      auth,
-      setAuth,
       isBackendAuthorized,
       userPermissions,
       isProcessing,
@@ -144,8 +139,6 @@ function AuthProvider(props) {
       signOut,
     }),
     [
-      auth,
-      setAuth,
       isBackendAuthorized,
       userPermissions,
       isProcessing,

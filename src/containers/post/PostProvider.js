@@ -45,6 +45,7 @@ function PostProvider(props) {
         console.log('Initiating updating posts');
         const { data } = await postAPIs.updatePostData(id, payload);
         if (data?.success) {
+          console.log(data?.message);
           showSuccessAlert(data?.message);
           console.log('Successfully updated posts', data?.data);
         }
