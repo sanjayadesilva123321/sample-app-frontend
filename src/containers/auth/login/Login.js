@@ -8,6 +8,7 @@ import { useAuth } from '../AuthProvider';
 
 import { USER } from '../../../helpers/auth';
 import { LOGIN } from '../../../helpers/login/login';
+import { routes } from '../../../helpers/routes';
 
 function Login() {
   const initialValues = {
@@ -58,7 +59,7 @@ function Login() {
           {LOGIN.NEED_AN_ACCOUNT}
           <br />
           <span className="line" data-testid="signup-span">
-            <Link to="/register">{LOGIN.SIGNUP}</Link>
+            <Link to={routes.UN_AUTHENTICATED.REGISTER.FULL_PATH}>{LOGIN.SIGNUP}</Link>
           </span>
         </p>
       </section>

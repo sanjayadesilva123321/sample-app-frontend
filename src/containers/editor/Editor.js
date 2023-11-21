@@ -7,18 +7,19 @@ import AuthorizedWithMessage from '../auth/authorizationWrappers/AuthorizedWithM
 
 import { ROLES } from '../../helpers/auth';
 import { EDITOR } from '../../helpers/editor/editor';
+import { routes } from '../../helpers/routes';
 
 function Editor() {
   return (
     <div data-testid="component-editor" className="wrapper">
       <AuthorizedWithMessage requiredPermissions={[ROLES.Manager, ROLES.Admin]}>
-        <h2>{EDITOR.EDITORS_PAGE}</h2>
+        <h2>{EDITOR.EDITOR_PAGE}</h2>
         <PostProvider>
           <Posts />
         </PostProvider>
         <br />
         <div className="flexGrow">
-          <Link to="/">{EDITOR.Home}</Link>
+          <Link to={routes.ROOT.PATH}>{EDITOR.Home}</Link>
         </div>
       </AuthorizedWithMessage>
     </div>

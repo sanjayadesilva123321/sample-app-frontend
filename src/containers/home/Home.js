@@ -8,6 +8,7 @@ import AuthorizedWithMessage from '../auth/authorizationWrappers/AuthorizedWithM
 
 import { ROLES } from '../../helpers/auth';
 import { HOME } from '../../helpers/home/home';
+import { routes } from '../../helpers/routes';
 
 import * as userSelector from '../../store/selectores/user';
 
@@ -26,7 +27,7 @@ function Home() {
           <h2>{HOME.HOME}</h2>
           <p>{`${HOME.YOU_ARE_LOGGED_IN} ${userName}`}</p>
           <br />
-          <Link to="/editor">{HOME.EDITORS_PAGE}</Link>
+          <Link to={routes.AUTHENTICATED.EDITOR.FULL_PATH}>{HOME.EDITORS_PAGE}</Link>
           <br />
           <div className="flexGrow">
             <Button onClick={signOutUser} variant="light" data-testid="home-sign-out">
