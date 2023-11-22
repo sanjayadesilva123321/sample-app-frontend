@@ -27,15 +27,14 @@ const initialState = {
 
 const store = storeFactory(initialState);
 
-const setup = (props = {}, contextValues = {}) => {
-  const setupProps = { ...props };
+const setup = (contextValues = {}) => {
   const setupContextValues = { ...defaultContextValues, ...contextValues };
 
   return render(
     <Provider store={store}>
       <BrowserRouter>
         <AuthContext.Provider value={setupContextValues}>
-          <Home {...setupProps} />
+          <Home />
         </AuthContext.Provider>
       </BrowserRouter>
     </Provider>,
@@ -58,7 +57,6 @@ describe('default component rendering tests', () => {
 
     act(() => {
       setup(
-        {},
         {
           hasPermission: jest.fn(() => true), // Provide the necessary permissions
           setIsBackendAuthorized,
@@ -76,7 +74,6 @@ describe('default component rendering tests', () => {
     const signOut = jest.fn();
     const setIsBackendAuthorized = jest.fn();
     setup(
-      {},
       {
         hasPermission: jest.fn(() => true), // Provide the necessary permissions
         signOut,
@@ -84,7 +81,7 @@ describe('default component rendering tests', () => {
       },
     );
     // Find the "Sign Out" button by its text content and click it
-    const signOutButton = screen.getByTestId('home-sign-out');
+    const signOutButton = screen.getByTestId('home-sign_out');
     fireEvent.click(signOutButton);
 
     // Assertions for sign out

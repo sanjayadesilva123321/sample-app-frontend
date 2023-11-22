@@ -50,7 +50,7 @@ function Login() {
               <Field type="password" id="password" name="password" className="fieldWrapper" />
               <ErrorMessage name="password" component="div" className="error" />
             </div>
-            <Button type="submit" variant="light" data-testid="login-signin-button">
+            <Button type="submit" variant="light" data-testid="login-signin_button">
               {LOGIN.SIGNIN}
             </Button>
           </Form>
@@ -58,7 +58,7 @@ function Login() {
         <p>
           {LOGIN.NEED_AN_ACCOUNT}
           <br />
-          <span className="line" data-testid="signup-span">
+          <span className="line" data-testid="login-signup_span">
             <Link to={routes.UN_AUTHENTICATED.REGISTER.FULL_PATH}>{LOGIN.SIGNUP}</Link>
           </span>
         </p>

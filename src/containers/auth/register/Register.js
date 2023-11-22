@@ -63,7 +63,7 @@ function Register() {
               />
               <ErrorMessage name="confirmPassword" component="div" className="error" />
             </div>
-            <Button type="submit" variant="light" data-testid="register-signup-button">
+            <Button type="submit" variant="light" data-testid="register-signup_button">
               {REGISTER.SIGNUP}
             </Button>
           </Form>
@@ -71,7 +71,7 @@ function Register() {
         <p>
           {REGISTER.ALREADY_REGISTERED}
           <br />
-          <span className="line" data-testid="signin-span">
+          <span className="line" data-testid="register-signin_span">
             <Link to={routes.ROOT.PATH}>{REGISTER.SIGNIN}</Link>
           </span>
         </p>

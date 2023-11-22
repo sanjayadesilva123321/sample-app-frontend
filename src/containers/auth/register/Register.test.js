@@ -17,17 +17,14 @@ const defaultContextValues = {
   registerUserFlow: mockRegisterUserFlow,
 };
 
-const setup = (props = {}, contextValues = {}) => {
-  const setupProps = { ...props };
-  const setupContextValues = { ...defaultContextValues, ...contextValues };
-  return render(
+const setup = () =>
+  render(
     <BrowserRouter>
-      <AuthContext.Provider value={setupContextValues}>
-        <Register {...setupProps} />
+      <AuthContext.Provider value={defaultContextValues}>
+        <Register />
       </AuthContext.Provider>
     </BrowserRouter>,
   );
-};
 
 describe('Register component tests', () => {
   test('Renders the Register component', () => {
@@ -56,7 +53,7 @@ describe('Register component tests', () => {
 
   test('Navigates to the Sign in page when "Sign In" link is clicked', () => {
     setup();
-    const signUpLink = screen.getByTestId('signin-span');
+    const signUpLink = screen.getByTestId('register-signin_span');
     fireEvent.click(signUpLink);
     // Add assertions for navigation to the registration page.
   });
@@ -76,7 +73,7 @@ describe('Register component tests', () => {
 
     // Wait for form submission
     await act(async () => {
-      fireEvent.click(screen.getByTestId('register-signup-button'));
+      fireEvent.click(screen.getByTestId('register-signup_button'));
     });
 
     // Check if registerUserFlow is called with the correct values

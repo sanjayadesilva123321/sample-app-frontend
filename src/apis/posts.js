@@ -4,7 +4,6 @@ import APIs from '../helpers/apiRoutes';
 
 /**
  * Get posts
- * @param {number} id - The role ID for which to retrieve posts.
  * @returns {Promise} A Promise that resolves to the post data or rejects with an error.
  */
 const getPosts = async () => {

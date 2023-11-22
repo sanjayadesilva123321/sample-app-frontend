@@ -40,7 +40,7 @@ const registerUser = async payload => {
 
 const getUserRoles = async () => {
   try {
-    const response = await get(`${APIs.AUTH.ROLES}`);
+    const response = await get(APIs.AUTH.ROLES);
     return response.data;
   } catch (e) {
     console.log('get user roles error', e);

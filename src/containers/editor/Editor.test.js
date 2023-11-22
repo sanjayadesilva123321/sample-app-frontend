@@ -14,17 +14,14 @@ const defaultContextValues = {
   setIsBackendAuthorized: jest.fn(),
 };
 
-const setup = (props = {}, contextValues = {}) => {
-  const setupProps = { ...props };
-  const setupContextValues = { ...defaultContextValues, ...contextValues };
-  return render(
+const setup = () =>
+  render(
     <BrowserRouter>
-      <AuthContext.Provider value={setupContextValues}>
-        <Editor {...setupProps} />
+      <AuthContext.Provider value={defaultContextValues}>
+        <Editor />
       </AuthContext.Provider>
     </BrowserRouter>,
   );
-};
 
 test('validate props types', () => {
   checkProps(Editor);

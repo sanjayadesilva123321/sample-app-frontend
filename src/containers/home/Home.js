@@ -30,7 +30,7 @@ function Home() {
           <Link to={routes.AUTHENTICATED.EDITOR.FULL_PATH}>{HOME.EDITORS_PAGE}</Link>
           <br />
           <div className="flexGrow">
-            <Button onClick={signOutUser} variant="light" data-testid="home-sign-out">
+            <Button onClick={signOutUser} variant="light" data-testid="home-sign_out">
               {HOME.SIGNOUT}
             </Button>
           </div>
