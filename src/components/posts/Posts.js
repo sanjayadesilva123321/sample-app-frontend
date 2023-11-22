@@ -48,7 +48,7 @@ function Posts() {
                       updateHandler(post);
                     }}
                     className="btn btn-primary"
-                    data-testid="update-button"
+                    data-testid="component-posts-update_button"
                   >
                     {TABLE.UPDATE}
                   </Button>
@@ -60,7 +60,7 @@ function Posts() {
                     }}
                     className="btn btn-danger"
                     disabled={!auth.hasPermission([ROLES.Admin])}
-                    data-testid="delete-button"
+                    data-testid="component-posts-delete_button"
                   >
                     {TABLE.DELETE}
                   </Button>

@@ -68,7 +68,7 @@ describe('component functionality tests', () => {
   test('should update post data  on button click', () => {
     setup();
     waitFor(() => {
-      fireEvent.click(screen.getByTestId('update-button'));
+      fireEvent.click(screen.getByTestId('component-posts-update_button'));
       expect(defaultPostContextValues.setPostData).toHaveBeenCalled(
         defaultPostContextValues.postData,
       );
@@ -82,7 +82,7 @@ describe('component functionality tests', () => {
       content: 'content',
     };
     waitFor(() => {
-      fireEvent.click(screen.getByTestId('modal-update-button'));
+      fireEvent.click(screen.getByTestId('component-posts-update_button'));
       expect(defaultPostContextValues.updatePost).toHaveBeenCalled(1, modifiedPost);
     });
   });
@@ -92,7 +92,7 @@ describe('Delete Button Tests', () => {
   test('should render a disabled delete button initially', () => {
     setup(); // Default setup with no permission
 
-    const deleteButton = screen.getByTestId('delete-button');
+    const deleteButton = screen.getByTestId('component-posts-delete_button');
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toBeDisabled();
   });
@@ -101,7 +101,7 @@ describe('Delete Button Tests', () => {
     const hasPermission = jest.fn(() => true); // Set to have permission
     setup({ hasPermission });
 
-    const deleteButton = screen.getByTestId('delete-button');
+    const deleteButton = screen.getByTestId('component-posts-delete_button');
     expect(deleteButton).toBeInTheDocument();
     await waitFor(() => {
       expect(deleteButton).toBeEnabled();
@@ -112,7 +112,7 @@ describe('Delete Button Tests', () => {
     const deletePostData = jest.fn();
     setup({}, { deletePostData });
 
-    const deleteButton = screen.getByTestId('delete-button');
+    const deleteButton = screen.getByTestId('component-posts-delete_button');
     fireEvent.click(deleteButton);
 
     await waitFor(() => {
@@ -124,14 +124,14 @@ describe('Delete Button Tests', () => {
     setup();
 
     // Show the modal by clicking the "Update" button
-    fireEvent.click(screen.getByTestId('update-button'));
+    fireEvent.click(screen.getByTestId('component-posts-update_button'));
 
     // Ensure that the modal is displayed
-    const modal = screen.getByTestId('update-post-modal');
+    const modal = screen.getByTestId('post-modal');
     expect(modal).toBeInTheDocument();
 
     // Hide the modal by calling onHide
-    fireEvent.click(screen.getByTestId('modal-update-close'));
+    fireEvent.click(screen.getByTestId('post-modal-update_close'));
   });
 
   test('should call deletePostData when the delete button is clicked with permission', async () => {
@@ -139,7 +139,7 @@ describe('Delete Button Tests', () => {
     const hasPermission = jest.fn(() => true); // Set to have permission
     setup({ hasPermission }, { deletePostData });
 
-    const deleteButton = screen.getByTestId('delete-button');
+    const deleteButton = screen.getByTestId('component-posts-delete_button');
     fireEvent.click(deleteButton);
 
     await waitFor(() => {

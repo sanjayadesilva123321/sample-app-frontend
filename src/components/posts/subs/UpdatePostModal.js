@@ -8,7 +8,7 @@ import { MODAL } from '../../../helpers/posts/posts';
 
 function UpdatePostModal({ show, onHide, onSubmit, postToEdit }) {
   return (
-    <Modal show={show} onHide={onHide} data-testid="update-post-modal">
+    <Modal show={show} onHide={onHide} data-testid="post-modal">
       <Modal.Header>
         <Modal.Title>{MODAL.UPDATE_POST}</Modal.Title>
       </Modal.Header>
@@ -20,10 +20,10 @@ function UpdatePostModal({ show, onHide, onSubmit, postToEdit }) {
                 <Field type="text" name="title" placeholder="Title..." />
                 <Field type="text" name="content" placeholder="Content..." />
                 <div className="action-button-wrapper">
-                  <Button type="submit" data-testid="modal-update-button" variant="primary">
+                  <Button type="submit" data-testid="post-modal-update_button" variant="primary">
                     {MODAL.UPDATE}
                   </Button>
-                  <Button onClick={onHide} variant="danger" data-testid="modal-update-close">
+                  <Button onClick={onHide} variant="danger" data-testid="post-modal-update_close">
                     {MODAL.CLOSE}
                   </Button>
                 </div>
