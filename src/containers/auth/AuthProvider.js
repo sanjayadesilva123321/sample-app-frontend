@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { createContext, useState, useContext, useEffect, useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import { jwtDecode } from 'jwt-decode';
 
 import * as authAPIs from '../../apis/auth';

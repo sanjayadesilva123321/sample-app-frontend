@@ -9,7 +9,10 @@ import APIs from '../helpers/apiRoutes';
  */
 const loginUser = async payload => {
   try {
-    const response = await post(APIs.AUTH.LOGIN, payload);
+    const response = await post(APIs.AUTH.LOGIN, payload, {
+      detachRoleToken: true,
+      detachAccessToken: true,
+    });
     return response.data;
   } catch (e) {
     console.log('login user error', e);
@@ -24,7 +27,10 @@ const loginUser = async payload => {
  */
 const registerUser = async payload => {
   try {
-    const response = await post(APIs.AUTH.REGISTER, payload);
+    const response = await post(APIs.AUTH.REGISTER, payload, {
+      detachRoleToken: true,
+      detachAccessToken: true,
+    });
     return response;
   } catch (e) {
     console.log('register user error', e);
