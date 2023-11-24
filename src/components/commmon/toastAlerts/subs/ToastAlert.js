@@ -11,7 +11,7 @@ function ToastAlert(props) {
 
   useEffect(() => {
     switch (type) {
-      case     TOAST_ALERT_TYPES.SUCCESS.type:
+      case      TOAST_ALERT_TYPES.SUCCESS.type:
         setMetaData(TOAST_ALERT_TYPES.SUCCESS);
         break;
       case TOAST_ALERT_TYPES.INFO.type:
