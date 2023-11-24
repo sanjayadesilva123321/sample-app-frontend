@@ -1,4 +1,4 @@
-import { post, get } from '../libs/api/apiWrapper';
+import { get, post } from '../libs/api/apiWrapper';
 
 import APIs from '../helpers/apiRoutes';
 
@@ -27,11 +27,10 @@ const loginUser = async payload => {
  */
 const registerUser = async payload => {
   try {
-    const response = await post(APIs.AUTH.REGISTER, payload, {
+    return await post(APIs.AUTH.REGISTER, payload, {
       detachRoleToken: true,
       detachAccessToken: true,
     });
-    return response;
   } catch (e) {
     console.log('register user error', e);
     throw e;
