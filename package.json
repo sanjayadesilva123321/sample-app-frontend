@@ -32,10 +32,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --clearCache && react-scripts test",
     "eject": "react-scripts eject",
+    "lint-check": "eslint",
+    "lint-fix": "eslint --fix",
     "format-check": "prettier --check",
-    "format": "prettier --write"
+    "format": "prettier --write",
+    "fix-all": "npm run format . && npm run lint-fix .",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -56,12 +60,20 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@testing-library/react-hooks": "^8.0.1",
+    "check-prop-types": "^1.1.2",
+    "commitlint-config-jira": "^1.6.4",
+    "commitlint-plugin-jira-rules": "^1.6.4",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "jest-canvas-mock": "^2.4.0",
+    "lint-staged": "^13.0.1",
     "prettier": "^2.7.0"
   },
   "lint-staged": {

@@ -55,7 +55,7 @@ describe('default component rendering tests', () => {
     });
     test('"icon" click close', () => {
       const hideAlertMock = jest.fn(); // Mock the hideAlert function
-      const defaultProps = {
+      const updatedProps = {
         alert: {
           id: '1',
           show: true,
@@ -68,11 +68,11 @@ describe('default component rendering tests', () => {
         hideAlert: hideAlertMock, // Use the mock function
       };
 
-      setup({ ...defaultProps, defaultProps });
+      setup(updatedProps);
       const iconComponent = screen.getByRole('button', { name: /close/i });
       fireEvent.click(iconComponent);
       // Assertions for calling hideAlertMock with the correct arguments
-      expect(hideAlertMock).toHaveBeenCalledWith(defaultProps.alert.id);
+      expect(hideAlertMock).toHaveBeenCalledWith(updatedProps.alert.id);
     });
     test('"icon" is correct', () => {
       setup();
