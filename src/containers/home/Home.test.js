@@ -56,12 +56,10 @@ describe('default component rendering tests', () => {
     const setIsBackendAuthorized = jest.fn();
 
     act(() => {
-      setup(
-        {
-          hasPermission: jest.fn(() => true), // Provide the necessary permissions
-          setIsBackendAuthorized,
-        },
-      );
+      setup({
+        hasPermission: jest.fn(() => true), // Provide the necessary permissions
+        setIsBackendAuthorized,
+      });
     });
 
     // Wait for the element to appear
@@ -73,13 +71,11 @@ describe('default component rendering tests', () => {
   test('Clicking "Sign Out" button should trigger sign out', () => {
     const signOut = jest.fn();
     const setIsBackendAuthorized = jest.fn();
-    setup(
-      {
-        hasPermission: jest.fn(() => true), // Provide the necessary permissions
-        signOut,
-        setIsBackendAuthorized,
-      },
-    );
+    setup({
+      hasPermission: jest.fn(() => true), // Provide the necessary permissions
+      signOut,
+      setIsBackendAuthorized,
+    });
     // Find the "Sign Out" button by its text content and click it
     const signOutButton = screen.getByTestId('home-sign_out');
     fireEvent.click(signOutButton);

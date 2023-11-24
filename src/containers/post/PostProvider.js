@@ -22,34 +22,28 @@ function PostProvider(props) {
     }
   }, []);
 
-  const deletePostData = useCallback(
-    async id => {
-      try {
-        const { data } = await postAPIs.deletePost(id);
-        if (data?.success) {
-          showSuccessAlert(data?.message);
-        }
-      } catch (e) {
-        console.log('Unable to delete posts', e);
+  const deletePostData = useCallback(async id => {
+    try {
+      const { data } = await postAPIs.deletePost(id);
+      if (data?.success) {
+        showSuccessAlert(data?.message);
       }
-    },
-    [],
-  );
+    } catch (e) {
+      console.log('Unable to delete posts', e);
+    }
+  }, []);
 
-  const updatePost = useCallback(
-    async (id, payload) => {
-      try {
-        const { data } = await postAPIs.updatePostData(id, payload);
-        if (data?.success) {
-          console.log(data?.message);
-          showSuccessAlert(data?.message);
-        }
-      } catch (e) {
-        console.log('Unable to update posts', e);
+  const updatePost = useCallback(async (id, payload) => {
+    try {
+      const { data } = await postAPIs.updatePostData(id, payload);
+      if (data?.success) {
+        console.log(data?.message);
+        showSuccessAlert(data?.message);
       }
-    },
-    [],
-  );
+    } catch (e) {
+      console.log('Unable to update posts', e);
+    }
+  }, []);
 
   /* -------------------------------------------------------------------------- */
   /*                                Return values                               */
