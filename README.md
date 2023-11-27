@@ -82,5 +82,5 @@ PORT=4200
 REACT_APP_BACKEND_API_BASE_URL will use for the backend api base url.
 PORT variable determines the port on which the frontend web application runs.
 
-## React version
-Please note that use react version v14.21.3 for this frontend app to compatibility. 
+## NodeJS version
+Please note that use react version v14.21.3 for this frontend app to compatibility purposes.
